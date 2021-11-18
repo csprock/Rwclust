@@ -19,6 +19,7 @@
 
 # RStudio files
 .Rproj.user/
+*.Rproj
 
 # produced vignettes
 vignettes/*.html
@@ -45,7 +46,16 @@ docs/
 po/*~
 
 # docker
-.config/*
 .env
 docker-compose.yml
 dockerfile*
+.vscode/*
+
+# rocker
+kitematic
+.config/*
+
+
+# environment
+.envconf/*
+scripts/
