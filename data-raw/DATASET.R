@@ -6,6 +6,7 @@ convert_to_Matrix <- function(data) {
   M <- Matrix(0, nrow=n, ncol=n)
   for (k in 1:nrow(data)) {
     M[data$from[k], data$to[k]] <- data$weight[k]
+    M[data$to[k], data$from[k]] <- data$weight[k]
   }
   return(M)
 }
