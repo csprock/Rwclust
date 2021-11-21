@@ -21,3 +21,13 @@ compute_kernel <- function(edgelist, mat, similarity, ...) {
     ...
   )
 }
+
+
+construct_kernel <- function(edgelist, weights, ...) {
+  Matrix::sparseMatrix(
+    i = edgelist[,1],
+    j = edgelist[,2],
+    x = weights,
+    ...
+  )
+}
