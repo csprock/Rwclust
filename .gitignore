@@ -20,6 +20,9 @@
 # RStudio files
 .Rproj.user/
 *.Rproj
+.local
+.config
+.bash_history
 
 # produced vignettes
 vignettes/*.html
@@ -50,6 +53,7 @@ po/*~
 docker-compose.yml
 dockerfile*
 .vscode/*
+.dockerignore
 
 # rocker
 kitematic

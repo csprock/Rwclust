@@ -2,3 +2,16 @@
 ^\.Rproj\.user$
 ^data-raw$
 ^LICENSE\.md$
+^\.config$
+^kitematic$
+^\.envconf$
+^\.gitignore$
+^\.env$
+^\.local$
+^\.Rhistory$
+^\.RData$
+^scripts$
+^\.dockerignore$
+^docker-compose\.yml$
+^\.git$
+^\.bash_history$
