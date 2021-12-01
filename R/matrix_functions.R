@@ -8,5 +8,12 @@ matrix_summation <- function(mat_list) {
 }
 
 compute_transition_matrix <- function(M) {
-    M / Matrix::rowSums(M)
+    if (is.matrix(M)) {
+      return(M / apply(X = M, MARGIN = 1, FUN = sum))
+    } else if (regexpr(text = class(M), pattern = "^[a-zA-z]+Matrix$") == 1) {
+      return(M / Matrix::rowSums(M))
+    } else {
+      stop("Must supply this function with matrix")
+    }
 }
+
