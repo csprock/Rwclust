@@ -13,6 +13,30 @@ compute_transition_matrix <- function(M) {
 }
 
 
+compute_kernel <- function(edgelist, mat, similarity, ...) {
+  apply(
+    X = edgelist,
+    FUN = apply_similarity,
+    MARGIN = 1,
+    mat = mat, 
+    similarity = similarity, 
+    ...
+  )
+}
+
+
+construct_kernel <- function(edgelist, weights, ...) {
+  Matrix::sparseMatrix(
+    i = edgelist[,1],
+    j = edgelist[,2],
+    x = weights,
+    ...
+  )
+}
+
+
+
+
 update_weights <- function(M, el, similarity, k) {
   
   M <- compute_transition_matrix(M)
