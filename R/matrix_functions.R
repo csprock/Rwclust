@@ -21,7 +21,7 @@ update_weights <- function(M, el, similarity, k) {
   )
   
   weights <- compute_kernel(el, Mk, similarity = similarity, k = k)
-  adj <- construct_kernel(el, weights, symmetric = TRUE, check = FALSE)
+  adj <- construct_kernel(el, weights, symmetric = TRUE, check = TRUE)
 
   return(list(weights = weights, adj = adj))
 
