@@ -50,6 +50,7 @@ check_undirected <- function(g) {
 rwclust <- function(x, similarity="hk", iter, k) {
 
     if (is.data.frame(x) || is.matrix(x)) {
+
         x <- as.matrix(x)
         check_df_dims(x)
         x[, c(1,2)] <- enforce_upper_triangular(x[, c(1,2)])
@@ -65,7 +66,30 @@ rwclust <- function(x, similarity="hk", iter, k) {
 
         return(rwclust_(adj, x, similarity, iter, k))
 
-    } else {
+    } else if (requireNamespace("igraph", quietly = TRUE)) {
+
+      if (igraph::is.igraph(x)) {
+
+        check_undirected(x)
+        check_simple(x)
+
+        if (!is.null(igraph::get.vertex.attribute(x, "name"))) {
+          warning("Vertex names will be converted to interger indices.")
+        }
+        if (is.null(igraph::get.edge.attribute(x, "weights"))) {
+          stop("Edge attribute 'weights' must be set")
+        }
+
+        adj <- igraph::as_adjacency_matrix(x, type="both", sparse=TRUE, attr="weights")
+        el <- igraph::as_edgelist(x, names=FALSE)
+
+        return(rwclust_(adj, el, similarity, iter, k))
+
+      } else {
+        stop("x must be dataframe, matrix or igraph.graph")
+      }
+
+     } else {
         stop("x must be a 3-column data frame or matrix")
     }
 }
