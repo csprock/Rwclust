@@ -32,6 +32,17 @@ check_df_dims <- function(el) {
     }
 }
 
+check_simple <- function(g) {
+  if (!igraph::is.simple(g)) {
+    stop("Graph must be simple")
+  }
+}
+
+check_undirected <- function(g) {
+  if (igraph::is.directed(g)) {
+    stop("Graph must be undirected")
+  }
+}
 
 rwclust <- function(x, similarity="hk",...) {
 
@@ -48,8 +59,29 @@ rwclust <- function(x, similarity="hk",...) {
             x = x[,3],
             symmetric=TRUE
         )
+       
+    } else if (requireNamespace("igraph", quietly = TRUE)) {
+
+      if (igraph::is.igraph(x)) {
+
+        check_undirected(x)
+        check_simple(x)
+
+        if (!is.null(igraph::get.vertex.attribute(x, "name"))) {
+          warning("Vertex names will be converted to interger indices.")
+        }
+        if (!is.null(igraph::get.edge.attribute(x, "weights"))) {
+          stop("Edge attribute 'weights' must be set")
+        }
+
+        adj <- igraph::as_adjacency_matrix(x, type="both", sparse=TRUE, attr="weights")
+        x <- igraph::as_edgelist(x, names=FALSE)
+
+      } else {
+        stop("x must be dataframe, matrix or igraph.graph")
+      }
     } else {
-        stop("x must be a 3-column data frame or matrix")
+        stop("x must be dataframe, matrix or igraph.graph")
     }
 
     similarity <- switch(
@@ -58,6 +90,13 @@ rwclust <- function(x, similarity="hk",...) {
     )
 
     sharpened_weights <- compute_new_weights(adj, x, similarity = similarity, ...)
+
+    if (igraph::is.igraph(x)){
+      
+      g <- igraph::graph_from_adjacency_matrix(adj)
+      igraph::E(g) <- sharpened_weights$weights
+      return(g)
+    }
 
     output <- list(
         weights = sharpened_weights$weights,
