@@ -32,6 +32,17 @@ check_df_dims <- function(el) {
     }
 }
 
+check_simple <- function(g) {
+  if (!igraph::is.simple(g)) {
+    stop("Graph must be simple")
+  }
+}
+
+check_undirected <- function(g) {
+  if (igraph::is.directed(g)) {
+    stop("Graph must be undirected")
+  }
+}
 
 check_simple <- function(g) {
   if (!igraph::is.simple(g)) {
@@ -64,7 +75,9 @@ rwclust <- function(x, similarity="hk", iter, k) {
             symmetric=TRUE
         )
 
+
         return(rwclust_(adj, x, similarity, iter, k))
+
 
     } else if (requireNamespace("igraph", quietly = TRUE)) {
 
@@ -103,6 +116,13 @@ rwclust_ <- function(adj, edgelist, similarity="hk", iter, k) {
     )
 
     sharpened_weights <- compute_new_weights(adj, edgelist, similarity, k, iter)
+
+    if (igraph::is.igraph(x)){
+      
+      g <- igraph::graph_from_adjacency_matrix(adj)
+      igraph::E(g) <- sharpened_weights$weights
+      return(g)
+    }
 
     output <- list(
         weights = sharpened_weights$weights,
