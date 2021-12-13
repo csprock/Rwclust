@@ -16,3 +16,6 @@ Suggests:
 Config/testthat/edition: 3
 Imports: 
     Matrix
+Depends: 
+    R (>= 2.10)
+LazyData: true
