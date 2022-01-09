@@ -45,33 +45,33 @@ format_and_check_dataframe <- function(x) {
 }
 
 
-check_simple <- function(g) {
-  if (!igraph::is.simple(g)) {
-    stop("Graph must be simple")
-  }
-}
+# check_simple <- function(g) {
+#   if (!igraph::is.simple(g)) {
+#     stop("Graph must be simple")
+#   }
+# }
 
-check_undirected <- function(g) {
-  if (igraph::is.directed(g)) {
-    stop("Graph must be undirected")
-  }
-}
+# check_undirected <- function(g) {
+#   if (igraph::is.directed(g)) {
+#     stop("Graph must be undirected")
+#   }
+# }
 
-check_name_attribute <- function(g) {
-    if (!is.null(igraph::get.vertex.attribute(g, "name"))) {
-        warning("Vertex names will be converted to interger indices.")
-    }
-}
+# check_name_attribute <- function(g) {
+#     if (!is.null(igraph::get.vertex.attribute(g, "name"))) {
+#         warning("Vertex names will be converted to interger indices.")
+#     }
+# }
 
-check_weights_attribute <- function(g) {
-    if (is.null(igraph::get.edge.attribute(g, "weights"))) {
-        stop("Edge attribute 'weights' must be set")
-    }
-}
+# check_weights_attribute <- function(g) {
+#     if (is.null(igraph::get.edge.attribute(g, "weights"))) {
+#         stop("Edge attribute 'weights' must be set")
+#     }
+# }
 
-check_igraph <- function(g) {
-    check_undirected(g)
-    check_simple(g)
-    check_name_attribute(g)
-    check_weights_attribute(g)
-}
+# check_igraph <- function(g) {
+#     check_undirected(g)
+#     check_simple(g)
+#     check_name_attribute(g)
+#     check_weights_attribute(g)
+# }

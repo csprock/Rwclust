@@ -13,21 +13,6 @@ rwclust <- function(x, similarity="hk", iter, k) {
         )
 
         return(rwclust_(adj, x, similarity, iter, k))
-        
-    } else if (requireNamespace("igraph", quietly = TRUE)) {
-
-      if (igraph::is.igraph(x)) {
-
-        check_igraph(x)
-
-        adj <- igraph::as_adjacency_matrix(x, type="both", sparse=TRUE, attr="weights")
-        el <- igraph::as_edgelist(x, names=FALSE)
-
-        return(rwclust_(adj, el, similarity, iter, k))
-
-      } else {
-        stop("x must be dataframe, matrix or igraph.graph")
-      }
 
      } else {
         stop("x must be a 3-column data frame or matrix")
