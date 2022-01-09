@@ -14,17 +14,23 @@ row represents an edge with a weight.
 }
 }
 \source{
-\href{Harel, David, and Yehuda Koren. "On clustering using random walks."
-International Conference on Foundations of Software Technology
-and Theoretical Computer Science. Springer, Berlin, Heidelberg, 2001.}{
-https://link.springer.com/chapter/10.1007/3-540-45294-X_3}
+\url{https://link.springer.com/chapter/10.1007/3-540-45294-X_3}
 }
 \usage{
-\dontrun{
- data(example2, package="Rwclust")
-}
+example2
 }
 \description{
 Second demonstration test graph used in the original paper by Harel and Koren.
+}
+\examples{
+\dontrun{
+ data(example2, package="Rwclust")
+}
+
+}
+\references{
+Harel, David, and Yehuda Koren. "On clustering using random walks."
+International Conference on Foundations of Software Technology
+and Theoretical Computer Science. Springer, Berlin, Heidelberg, 2001.
 }
 \keyword{datasets}
