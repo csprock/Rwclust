@@ -7,24 +7,21 @@ matrix_summation <- function(mat_list) {
   Reduce(`+`, mat_list, accumulate = FALSE)
 }
 
-# regexpr(text = class(M), pattern = "^[a-zA-z]+Matrix$") == 1
+#' Compute transition matrix
+#' 
+#' @param M sparseMatrix or denseMatrix
+#' 
+#' @return transition matrix
 compute_transition_matrix <- function(M) {
       M / Matrix::rowSums(M)
 }
 
-
-compute_kernel <- function(edgelist, mat, similarity, ...) {
-  apply(
-    X = edgelist,
-    FUN = apply_similarity,
-    MARGIN = 1,
-    mat = mat, 
-    similarity = similarity, 
-    ...
-  )
-}
-
-
+#' Construct sparse matrix from weighted edgelist
+#' 
+#' @param edgelist a dataframe with two columns
+#' @param weights a vector of weights
+#' 
+#' @return sparseMatrix
 construct_kernel <- function(edgelist, weights, ...) {
   Matrix::sparseMatrix(
     i = edgelist[,1],
@@ -34,9 +31,14 @@ construct_kernel <- function(edgelist, weights, ...) {
   )
 }
 
-
-
-
+#' Update edge weights
+#' 
+#' @param M matrix
+#' @param el dataframe representing weighted edgelist
+#' @param similarity a similarity function
+#' @param k integer, length of longest walk
+#' 
+#' @param list
 update_weights <- function(M, el, similarity, k) {
   
   M <- compute_transition_matrix(M)
@@ -51,6 +53,15 @@ update_weights <- function(M, el, similarity, k) {
 
 }
 
+#' Execute main algorithm loop
+#' 
+#' @param M transition matrix
+#' @param el dataframe edgelist
+#' @param similarity a similarity function
+#' @param k integer, length of longest walk
+#' @param iter number of iterations
+#' 
+#' @return list
 compute_new_weights <- function(M, el, similarity, k, iter) {
 
   if (!is.numeric(iter) || iter < 1) {
