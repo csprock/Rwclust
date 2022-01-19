@@ -20,7 +20,7 @@ test_that("Test matrix_summation()", {
 })
 
 
-test_that("Test compute_transition_matrix", {
+test_that("Test compute_transition_matrix()", {
 
   m <- Matrix::Matrix(
     c(
@@ -41,3 +41,24 @@ test_that("Test compute_transition_matrix", {
   expect_equal(sum(compute_transition_matrix(m) == expected), 9)
 
 })
+
+
+test_that("Test update_weights() and run_main_loop() runs without error", {
+
+  m <- Matrix::Matrix(
+    c(
+      c(1, 1, 0),
+      c(0, 1, 0),
+      c(2, 3, 0)
+    ), ncol = 3, byrow = TRUE
+  )
+
+  el <- data.frame(
+    from=c(1,2,1),
+    to=c(2,3,3),
+    weight=c(1,1,1)
+  )
+
+  expect_type(update_weights(m, el, hk_similarity, 3), "list")
+
+}) 
