@@ -25,7 +25,7 @@ apply_similarity<- function(idx, mat, similarity, ...) {
 #' @param ... other parameters to pass to the similarity function
 #' 
 #' @return a vector containing updated weights
-compute_kernel <- function(edgelist, mat, similarity, ...) {
+compute_similarities <- function(edgelist, mat, similarity, ...) {
   apply(
     X = edgelist,
     FUN = apply_similarity,

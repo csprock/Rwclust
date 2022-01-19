@@ -18,11 +18,13 @@ compute_transition_matrix <- function(M) {
 
 #' Construct sparse matrix from weighted edgelist
 #' 
+#' Takes the weights from compute_kernel and creates weighted adjacency matrix
+#' 
 #' @param edgelist a dataframe with two columns
 #' @param weights a vector of weights
 #' 
 #' @return sparseMatrix
-construct_kernel <- function(edgelist, weights, ...) {
+create_weight_matrix <- function(edgelist, weights, ...) {
   Matrix::sparseMatrix(
     i = edgelist[,1],
     j = edgelist[,2],
@@ -46,8 +48,8 @@ update_weights <- function(M, el, similarity, k) {
     matrix_power(M, k, accumulate = TRUE)
   )
   
-  weights <- compute_kernel(el, Mk, similarity = similarity, k = k)
-  adj <- construct_kernel(el, weights, symmetric = TRUE, check = TRUE)
+  weights <- compute_similarities(el, Mk, similarity = similarity, k = k)
+  adj <- create_weight_matrix(el, weights, symmetric = TRUE, check = TRUE)
 
   return(list(weights = weights, adj = adj))
 
@@ -62,7 +64,7 @@ update_weights <- function(M, el, similarity, k) {
 #' @param iter number of iterations
 #' 
 #' @return list
-compute_new_weights <- function(M, el, similarity, k, iter) {
+run_main_loop <- function(M, el, similarity, k, iter) {
 
   if (!is.numeric(iter) || iter < 1) {
     stop("Invalid value for iter")
