@@ -1,0 +1,83 @@
+---
+title: "Basic Usage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Basic Usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(Rwclust)
+library(igraph)
+```
+
+# Introduction
+
+
+
+# Basic Usage
+
+
+
+```{r}
+data(example1, package="Rwclust")
+
+cluster_labels <- c(1,1,1,1,2,2,2,2,3,3,3,3,3,3,3,3,3,4,4,4,4)
+
+G <- igraph::graph_from_edgelist(as.matrix(example1[, c(1,2)]), directed=FALSE)
+E(G)$weights <- example1$weight
+plot(G, edge.label=E(G)$weights, vertex.color=cluster_labels, layout=layout_with_fr)
+```
+
+```{r}
+result <- rwclust(example1, similarity="hk", iter=6, k=3)
+
+
+G_sharpened <- igraph::graph_from_edgelist(as.matrix(example1[, c(1,2)]), directed=FALSE)
+E(G_sharpened)$weights <- round(result$weights,1)
+plot(G_sharpened, edge.label=E(G_sharpened)$weights, vertex.color=cluster_labels, layout=layout_with_fr)
+
+
+
+
+
+
+#G2 <- igraph::graph_from_adjacency_matrix(result$adjacency, mode="undirected", weighted = TRUE)
+```
+```{r}
+hist(result$weights, breaks=20, 
+     main="Distribution of Final Edge Weights",
+     xlab="Edge Weight")
+abline(v=25, col="red")
+
+```
+
+
+```{r}
+# delete edges with weights below the threshold
+thresh <- 25
+edges_to_keep <- which(result$weights > thresh)
+
+clustered_graph <- example1[edges_to_keep, ]
+clustered_graph$weight <- result$weights[edges_to_keep]
+
+G_clustered <- igraph::graph_from_edgelist(as.matrix(clustered_graph[, c(1,2)]), directed=FALSE)
+E(G_clustered)$weights <- clustered_graph$weight
+
+plot(G_clustered, vertex.color=cluster_labels)
+```
+
+
+
+
+
+
+
