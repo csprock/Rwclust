@@ -14,45 +14,63 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, message=FALSE}
 library(Rwclust)
 library(igraph)
 ```
+This vignette shows how to cluster the vertices of a weighted graph using the random walk method developed by Horel and Koren [1] with the `Rwclust` package using an example. 
 
 # Introduction
 
+The random walk algorithm of Horel and Koren [1] for clustering weighted graphs is based on the concepts of *connected components* and *cut edges*. Denote a graph $G=(V, E)$ where $V$ is the set of vertices and $E$ is the set of edges. A *connected component* is a subset of vertices that are mutually reachable. A graph can have one connected component constituting the entire graph, or several connected components that for purposes represent clusters. 
 
+A set of *cut edges* is a set $E' \subset E$ such that the number of connected components in $G-E$ is greater than that in $G$. Essentially, $E'$ contains a set of edges whose removal results in the creation of separate clusters of vertices. 
 
-# Basic Usage
+The random walk algorithm finds a set of cut edges but "sharpening" the difference between the weights of edges which connect vertices in a connected component, whose weights grow each iteration of the algorithm, and the weights of edges that run between separate components, which become much smaller. All edges below whose weight lies below a certain user-defined threshold are deleted and the resulting connected components become the clusters.
 
+The high-level steps in the algorithm are: 
 
+1. sharpen edge weights using random walks
+2. select a cutoff using a histogram of the weights
+3. delete edges below the cutoff
+4. compute the connected components of the resulting graph
+
+# Usage Example
+
+We will use an example graph taken from Horel and Koren. 
 
 ```{r}
 data(example1, package="Rwclust")
+head(example1)
+```
 
-cluster_labels <- c(1,1,1,1,2,2,2,2,3,3,3,3,3,3,3,3,3,4,4,4,4)
+The data is contained in a dataframe. We use `igraph` to create a graph object a display it along with the edge weights. 
+```{r, echo=FALSE, warning=FALSE, fig.align='center', fig.width=7, fig.height=5}
+labels <- c(1,1,1,1,2,2,2,2,3,3,3,3,3,3,3,3,3,4,4,4,4)
 
 G <- igraph::graph_from_edgelist(as.matrix(example1[, c(1,2)]), directed=FALSE)
-E(G)$weights <- example1$weight
-plot(G, edge.label=E(G)$weights, vertex.color=cluster_labels, layout=layout_with_fr)
+G <- igraph::set_edge_attr(G, "weight", value=example1$weight)
+
+plot(G, edge.label=E(G)$weight, vertex.color=labels, layout=layout_with_fr)
 ```
+
+The `rwclust` function applies the edge-sharpening algorithm and returns a list containing a vector of the final weights and a sparse matrix representing the weighted adjacency matrix of the new graph. The `iter` parameter is the number of algorithm iterations and `k` is the maximum length of random walk to consider. 
 
 ```{r}
 result <- rwclust(example1, similarity="hk", iter=6, k=3)
+```
 
-
+Next we plot the new weights. Notice how the weights connecting the clusters are 0 and all the other weights are larger than their original values. 
+```{r, fig.align='center', fig.width=7, fig.height=5}
 G_sharpened <- igraph::graph_from_edgelist(as.matrix(example1[, c(1,2)]), directed=FALSE)
 E(G_sharpened)$weights <- round(result$weights,1)
-plot(G_sharpened, edge.label=E(G_sharpened)$weights, vertex.color=cluster_labels, layout=layout_with_fr)
-
-
-
-
-
-
-#G2 <- igraph::graph_from_adjacency_matrix(result$adjacency, mode="undirected", weighted = TRUE)
+plot(G_sharpened, edge.label=E(G_sharpened)$weights, vertex.color=labels, layout=layout_with_fr)
 ```
-```{r}
+
+Before edges are deleted and the connected components calculated, the user must select a cutoff. To do this we plot a histogram of the edge weights. Note that there appear to be several edges with very small edge weights. 25 seems to be an appropriate cutoff. 
+
+
+```{r, fig.align='center', fig.width=7, fig.height=5}
 hist(result$weights, breaks=20, 
      main="Distribution of Final Edge Weights",
      xlab="Edge Weight")
@@ -60,24 +78,25 @@ abline(v=25, col="red")
 
 ```
 
+The next step is to remove the edges that are below the threshold and compute the connected components. 
 
-```{r}
+```{r, fig.align='center', fig.width=7, fig.height=5}
 # delete edges with weights below the threshold
-thresh <- 25
-edges_to_keep <- which(result$weights > thresh)
+edges_to_keep <- which(result$weights > 25)
+example1_c <- example1[edges_to_keep, ]
+example1_c$weight <- result$weights[edges_to_keep]
 
-clustered_graph <- example1[edges_to_keep, ]
-clustered_graph$weight <- result$weights[edges_to_keep]
+G_c <- igraph::graph_from_edgelist(as.matrix(example1_c[, c(1,2)]), directed=FALSE)
 
-G_clustered <- igraph::graph_from_edgelist(as.matrix(clustered_graph[, c(1,2)]), directed=FALSE)
-E(G_clustered)$weights <- clustered_graph$weight
+# compute the connected components
+clusters <- igraph::components(G_c)$membership
 
-plot(G_clustered, vertex.color=cluster_labels)
+plot(G_c, vertex.color=clusters)
 ```
 
+# References
 
-
-
+[1] Harel, David, and Yehuda Koren. "On clustering using random walks." *International Conference on Foundations of Software Technology and Theoretical Computer Science*. Springer, Berlin, Heidelberg, 2001.
 
 
 
