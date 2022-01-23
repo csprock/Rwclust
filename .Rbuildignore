@@ -16,3 +16,5 @@
 ^\.git$
 ^\.bash_history$
 ^weighted_graph_clustering$
+^doc$
+^Meta$

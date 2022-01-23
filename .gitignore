@@ -65,3 +65,5 @@ kitematic
 scripts/
 weighted_graph_clustering
 inst/doc
+/doc/
+/Meta/
