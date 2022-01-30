@@ -9,7 +9,7 @@ compute_similarities(edgelist, mat, similarity, ...)
 \arguments{
 \item{edgelist}{3-column dataframe}
 
-\item{mat}{transition matrix}
+\item{mat}{a matrix}
 
 \item{similarity}{the similarity function to apply}
 

@@ -36,7 +36,7 @@
 #' @return list
 #' \describe{
 #'  \item{weights}{A vector of the updated edge weights}
-#'  \item{adjacency}{Updated adjacency matrix containing updated weights}
+#'  \item{adj}{Updated adjacency matrix containing updated weights}
 #' }
 #' @export
 rwclust <- function(x, similarity="hk", iter, k) {
@@ -59,7 +59,19 @@ rwclust <- function(x, similarity="hk", iter, k) {
     }
 }
 
-
+#' Executes the full algorithm
+#' 
+#' \code{rwclust} servers as the user-facing wrapper function for this function
+#' 
+#' @param adj a sparseMatrix representing the adjacency matrix
+#' @inheritParams rwclust
+#' 
+#' @return list
+#' \describe{
+#'  \item{weights}{A vector of the updated edge weights}
+#'  \item{adj}{Updated adjacency matrix containing updated weights}
+#' }
+#' @export
 rwclust_ <- function(adj, edgelist, similarity="hk", iter, k) {
 
     similarity <- switch(
@@ -71,7 +83,7 @@ rwclust_ <- function(adj, edgelist, similarity="hk", iter, k) {
 
     output <- list(
         weights = sharpened_weights$weights,
-        adjacency = sharpened_weights$adj
+        adj = sharpened_weights$adj
     )
 
     return(output)

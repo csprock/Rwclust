@@ -4,16 +4,19 @@
 \alias{update_weights}
 \title{Update edge weights}
 \usage{
-update_weights(M, el, similarity, k)
+update_weights(M, edgelist, similarity, k)
 }
 \arguments{
 \item{M}{matrix}
 
-\item{el}{dataframe representing weighted edgelist}
+\item{edgelist}{dataframe representing weighted edgelist}
 
 \item{similarity}{a similarity function}
 
 \item{k}{integer, length of longest walk}
+}
+\value{
+list
 }
 \description{
 Update edge weights

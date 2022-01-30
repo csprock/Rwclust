@@ -25,7 +25,7 @@ update weights}
 list
 \describe{
 \item{weights}{A vector of the updated edge weights}
-\item{adjacency}{Updated adjacency matrix containing updated weights}
+\item{adj}{Updated adjacency matrix containing updated weights}
 }
 }
 \description{

@@ -6,14 +6,14 @@
 #' @param ... additional parameters to be passed to the similarity function
 #' 
 #' @return a scalar
-apply_similarity<- function(idx, mat, similarity, ...) {
+apply_similarity <- function(idx, mat, similarity, ...) {
   similarity(mat[idx[1],], mat[idx[2],], ...)
 }
 
 #' Apply similarity function over edges of graph
 #' 
 #' @param edgelist 3-column dataframe
-#' @param mat transition matrix
+#' @param mat a matrix
 #' @param similarity the similarity function to apply
 #' @param ... other parameters to pass to the similarity function
 #' 
