@@ -9,6 +9,8 @@ rwclust_(adj, edgelist, similarity = "hk", iter, k)
 \arguments{
 \item{adj}{a sparseMatrix representing the adjacency matrix}
 
+\item{edgelist}{dataframe edgelist}
+
 \item{similarity}{string, the name of the similarity metric used to
 update weights}
 

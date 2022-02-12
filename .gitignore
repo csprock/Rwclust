@@ -61,7 +61,7 @@ kitematic
 
 
 # environment
-.envconf/*
+.envconf
 scripts/
 weighted_graph_clustering
 inst/doc

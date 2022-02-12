@@ -22,6 +22,7 @@ compute_transition_matrix <- function(x) {
 #' 
 #' @param edgelist a dataframe with two columns
 #' @param weights a vector of weights
+#' @param ... other parameters to be passed to Matrix::sparseMatrix()
 #' 
 #' @return sparseMatrix
 create_weight_matrix <- function(edgelist, weights, ...) {

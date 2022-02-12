@@ -64,6 +64,7 @@ rwclust <- function(x, similarity="hk", iter, k) {
 #' \code{rwclust} servers as the user-facing wrapper function for this function
 #' 
 #' @param adj a sparseMatrix representing the adjacency matrix
+#' @param edgelist dataframe edgelist
 #' @inheritParams rwclust
 #' 
 #' @return list
