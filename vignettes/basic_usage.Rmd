@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette shows how to cluster the vertices of a weighted graph using the random walk method developed by Horel and Koren [1] with the `Rwclust` package using an example. 
+This vignette shows how to cluster the vertices of a weighted graph using the random walk method developed by Harel and Koren [1] with the `Rwclust` package using an example. 
 
 ```{r setup, message=FALSE}
 library(Rwclust)

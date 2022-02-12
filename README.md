@@ -4,7 +4,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of Rwclust is to implement the [random walk clustering algorithm for weighted graphs](https://www.wisdom.weizmann.ac.il/~harel/papers/Clustering_FSTTCS.pdf) by Horel and Koren]. 
+The goal of Rwclust is to implement the [random walk clustering algorithm for weighted graphs](https://www.wisdom.weizmann.ac.il/~harel/papers/Clustering_FSTTCS.pdf) by Harel and Koren]. 
 
 ## Installation
 
