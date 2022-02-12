@@ -4,12 +4,12 @@
 \alias{run_main_loop}
 \title{Execute main algorithm loop}
 \usage{
-run_main_loop(M, el, similarity, k, iter)
+run_main_loop(M, edgelist, similarity, k, iter)
 }
 \arguments{
 \item{M}{transition matrix}
 
-\item{el}{dataframe edgelist}
+\item{edgelist}{dataframe edgelist}
 
 \item{similarity}{a similarity function}
 

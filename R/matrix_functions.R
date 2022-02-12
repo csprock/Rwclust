@@ -9,11 +9,11 @@ matrix_summation <- function(mat_list) {
 
 #' Compute transition matrix
 #' 
-#' @param M sparseMatrix or denseMatrix
+#' @param x sparseMatrix or denseMatrix
 #' 
 #' @return transition matrix
-compute_transition_matrix <- function(M) {
-      M / Matrix::rowSums(M)
+compute_transition_matrix <- function(x) {
+      x / Matrix::rowSums(x)
 }
 
 #' Construct sparse matrix from weighted edgelist
@@ -22,6 +22,7 @@ compute_transition_matrix <- function(M) {
 #' 
 #' @param edgelist a dataframe with two columns
 #' @param weights a vector of weights
+#' @param ... other parameters to be passed to Matrix::sparseMatrix()
 #' 
 #' @return sparseMatrix
 create_weight_matrix <- function(edgelist, weights, ...) {
@@ -36,20 +37,20 @@ create_weight_matrix <- function(edgelist, weights, ...) {
 #' Update edge weights
 #' 
 #' @param M matrix
-#' @param el dataframe representing weighted edgelist
+#' @param edgelist dataframe representing weighted edgelist
 #' @param similarity a similarity function
 #' @param k integer, length of longest walk
 #' 
-#' @param list
-update_weights <- function(M, el, similarity, k) {
+#' @return list
+update_weights <- function(M, edgelist, similarity, k) {
   
   M <- compute_transition_matrix(M)
   Mk <- matrix_summation(
     matrix_power(M, k, accumulate = TRUE)
   )
   
-  weights <- compute_similarities(el, Mk, similarity = similarity, k = k)
-  adj <- create_weight_matrix(el, weights, symmetric = TRUE, check = TRUE)
+  weights <- compute_similarities(edgelist, Mk, similarity = similarity, k = k)
+  adj <- create_weight_matrix(edgelist, weights, symmetric = TRUE, check = TRUE)
 
   return(list(weights = weights, adj = adj))
 
@@ -58,20 +59,20 @@ update_weights <- function(M, el, similarity, k) {
 #' Execute main algorithm loop
 #' 
 #' @param M transition matrix
-#' @param el dataframe edgelist
+#' @param edgelist dataframe edgelist
 #' @param similarity a similarity function
 #' @param k integer, length of longest walk
 #' @param iter number of iterations
 #' 
 #' @return list
-run_main_loop <- function(M, el, similarity, k, iter) {
+run_main_loop <- function(M, edgelist, similarity, k, iter) {
 
   if (!is.numeric(iter) || iter < 1) {
     stop("Invalid value for iter")
   }
 
   for (i in 1:iter) {
-    results <- update_weights(M = M, el = el, similarity = similarity, k = k)
+    results <- update_weights(M = M, edgelist = edgelist, similarity = similarity, k = k)
     M <- results$adj
   }
 

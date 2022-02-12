@@ -4,10 +4,10 @@
 \alias{compute_transition_matrix}
 \title{Compute transition matrix}
 \usage{
-compute_transition_matrix(M)
+compute_transition_matrix(x)
 }
 \arguments{
-\item{M}{sparseMatrix or denseMatrix}
+\item{x}{sparseMatrix or denseMatrix}
 }
 \value{
 transition matrix

@@ -10,6 +10,8 @@ create_weight_matrix(edgelist, weights, ...)
 \item{edgelist}{a dataframe with two columns}
 
 \item{weights}{a vector of weights}
+
+\item{...}{other parameters to be passed to Matrix::sparseMatrix()}
 }
 \value{
 sparseMatrix
