@@ -1,5 +1,5 @@
 Package: Rwclust
-Title: Random walk clustering on weighted graphs
+Title: Random Walk Clustering on Weighted Graphs
 Version: 0.0.0.9000
 Authors@R: 
     person("Carson", "Sprock", , "csprock@gmail.com", role = c("aut", "cre"))
