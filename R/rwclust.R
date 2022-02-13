@@ -7,7 +7,7 @@
 #' Internally, the edgelist passed to \code{rwclust} is converted 
 #' into a transition matrix, whose powers are used to compute the 
 #' probability of reaching a vertex \eqn{u} from vertex \eqn{v} in 
-#' \eqn{k} steps for all \eqn{v,u}. New edge weights are computed 
+#' \eqn{k} steps for all \eqn{v} and \eqn{u}. New edge weights are computed 
 #' using the similarity between these "walk probabilities" for each pair
 #' of vertices. The intuition is that vertices who have similar 
 #' neighborhoods in terms of random walk reachability are similar 

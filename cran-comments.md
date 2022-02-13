@@ -4,18 +4,26 @@ There were no ERRORs, WARNINGs.
 
 There were two NOTEs:
 
-* The Title field should be in title case. Current version is:
-  'Random walk clustering on weighted graphs'
-  In title case that is:
-  Possibly misspelled words in DESCRIPTION:
-  'Random Walk Clustering on Weighted Graphs'
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: ‘Carson Sprock <csprock@gmail.com>’
 
-Will resubmit after fixing this.
+  New submission
+
+  Version contains large components (0.0.0.9000)
+
+  Possibly misspelled words in DESCRIPTION:
+    Harel (9:5)
+    Koren (9:30)
+    Springer (11:35)
+    Yehuda (9:23)
+
+Large component version number is for preliminary development version. 
+Words that were flagged by the spellchecker are proper nouns and names. 
 
 * Found the following files/directories:
     'lastMiKTeXException'
 
-I am unable to reproduce this locally with `R CMD check`.
+This error only appears with Windows via rhub and I am unable to reproduce it locally. 
 
 ## Downstream dependencies
 There are no down stream dependencies. 
