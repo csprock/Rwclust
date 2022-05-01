@@ -17,13 +17,12 @@ Maintainer: ‘Carson Sprock <csprock@gmail.com>’
     Springer (11:35)
     Yehuda (9:23)
 
-Large component version number is for preliminary development version. 
-Words that were flagged by the spellchecker are proper nouns and names. 
+First submission. Large component version number is for preliminary development version. Words that were flagged by the spellchecker are proper nouns and names. 
 
 * Found the following files/directories:
     'lastMiKTeXException'
 
-This error only appears with Windows via rhub and I am unable to reproduce it locally. 
+This note only appears on Windows Server 2022, R-devel, 64 bit. I am unable to reproduce it locally or when checking against any other R Hub operating system or R version.
 
 ## Downstream dependencies
 There are no down stream dependencies. 
