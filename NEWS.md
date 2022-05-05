@@ -1,3 +1,3 @@
-# 0.0.0.9000
+# 0.0.1
 
-This is the preliminary development version for making sure package structure, deployment pattern and user interface are working. 
+This is the first development release. It ensures the user interface is working correctly and vignettes work. 
