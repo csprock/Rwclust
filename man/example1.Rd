@@ -13,24 +13,14 @@ row represents an edge with a weight:
 \item{weight}{A double representing the edge weight}
 }
 }
-\source{
-\url{https://link.springer.com/chapter/10.1007/3-540-45294-X_3}
-}
 \usage{
 example1
 }
 \description{
-Second demonstration test graph used in the original paper by Harel and Koren.
+First demonstration test graph used in the original.
 }
 \examples{
-\dontrun{
 data(example1, package="Rwclust")
-}
 
-}
-\references{
-Harel, David, and Yehuda Koren. "On clustering using random walks."
-International Conference on Foundations of Software Technology
-and Theoretical Computer Science. Springer, Berlin, Heidelberg, 2001.
 }
 \keyword{datasets}

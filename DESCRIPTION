@@ -6,9 +6,7 @@ Authors@R:
 Author: Carson Sprock [aut, cre]
 Maintainer: Carson Sprock <csprock@gmail.com>
 Description: Implements the random walk clustering algorithm for weighted graphs as found in
-    Harel, David, and Yehuda Koren. "On clustering using random walks." International 
-    Conference on Foundations of Software Technology and 
-    Theoretical Computer Science. Springer, Berlin, Heidelberg, 2001.
+    Harel and Koren (2001) <https://link.springer.com/chapter/10.1007/3-540-45294-X_3>. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
