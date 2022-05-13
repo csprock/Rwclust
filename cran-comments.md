@@ -10,10 +10,8 @@ Maintainer: ‘Carson Sprock <csprock@gmail.com>’
   New submission
 
   Possibly misspelled words in DESCRIPTION:
-    Harel (9:5)
-    Koren (9:30)
-    Springer (11:35)
-    Yehuda (9:23)
+    Harel (8:94)
+    Koren (8:104)
 
 First submission. Words that were flagged by the spellchecker are proper nouns and names. 
 
