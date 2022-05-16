@@ -39,7 +39,6 @@ check_df_dims <- function(el) {
 
 
 format_and_check_dataframe <- function(x) {
-    x <- as.matrix(x)
     check_df_dims(x)
     x[, c(1, 2)] <- enforce_upper_triangular(x[, c(1, 2)])
     check_duplicates(x)
