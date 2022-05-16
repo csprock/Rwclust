@@ -13,7 +13,13 @@ The goal of Rwclust is an implementation of the [random walk clustering algorith
 
 ## Installation
 
-You can install the development version of Rwclust from [GitHub](https://github.com/) with:
+You can install the latest version from CRAN with:
+
+```r
+install.packages("Rwclust")
+```
+
+Alternatively, you can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 install.packages("devtools")
