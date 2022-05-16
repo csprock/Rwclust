@@ -37,8 +37,13 @@
 #'  \item{weights}{A vector of the updated edge weights}
 #'  \item{adj}{Updated adjacency matrix containing updated weights}
 #' }
+#' 
+#' @importFrom checkmate assert_count
 #' @export
 rwclust <- function(x, iter = 5, k = 3, similarity = "hk") {
+  assert_count(iter, positive = TRUE)
+  assert_count(k, positive = TRUE)
+  
   UseMethod("rwclust")
 }
 
