@@ -83,8 +83,8 @@ rwclust_ <- function(adj, edgelist, similarity="hk", iter, k) {
     sharpened_weights <- run_main_loop(adj, edgelist, similarity, k, iter)
 
     output <- list(
-        weights = sharpened_weights$weights,
-        adj = sharpened_weights$adj
+        weights = sharpened_weights[["weights"]],
+        adj = sharpened_weights[["adj"]]
     )
 
     return(output)
