@@ -2,9 +2,15 @@
 % Please edit documentation in R/rwclust.R
 \name{rwclust}
 \alias{rwclust}
+\alias{rwclust.data.frame}
+\alias{rwclust.matrix}
 \title{Sharpen the edge weights of a weighted graph.}
 \usage{
-rwclust(x, similarity = "hk", iter, k)
+rwclust(x, iter = 5, k = 3, similarity = "hk")
+
+\method{rwclust}{data.frame}(x, iter = 5, k = 3, similarity = "hk")
+
+\method{rwclust}{matrix}(x, iter = 5, k = 3, similarity = "hk")
 }
 \arguments{
 \item{x}{matrix or dataframe with three columns
@@ -14,12 +20,12 @@ rwclust(x, similarity = "hk", iter, k)
 \item edge weights (float)
 }}
 
-\item{similarity}{string, the name of the similarity metric used to
-update weights}
-
 \item{iter}{integer, number of iterations}
 
 \item{k}{integer, maximum length of random walk}
+
+\item{similarity}{string, the name of the similarity metric used to
+update weights}
 }
 \value{
 list

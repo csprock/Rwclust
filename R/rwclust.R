@@ -1,4 +1,3 @@
-
 #' Sharpen the edge weights of a weighted graph.
 #' 
 #' Sharpens the weights of a weighted graph for later pruning.
@@ -39,25 +38,38 @@
 #'  \item{adj}{Updated adjacency matrix containing updated weights}
 #' }
 #' @export
-rwclust <- function(x, similarity="hk", iter, k) {
-
-    if (is.data.frame(x) || is.matrix(x)) {
-
-        x <- format_and_check_dataframe(x)
-
-        adj <- Matrix::sparseMatrix(
-            i = x[,1],
-            j = x[,2],
-            x = x[,3],
-            symmetric=TRUE
-        )
-
-        return(rwclust_(adj, x, similarity, iter, k))
-
-     } else {
-        stop("x must be a 3-column data frame or matrix")
-    }
+rwclust <- function(x, iter = 5, k = 3, similarity = "hk") {
+  UseMethod("rwclust")
 }
+
+#' @export
+rwclust.default <- function(x, iter = 5, k = 3, similarity = "hk") {
+  stop("x must be a 3-column data frame or matrix")
+}
+
+#' @rdname rwclust
+#' @export
+rwclust.data.frame <- function(x, iter = 5, k = 3, similarity = "hk") {
+  rwclust(as.matrix(x), iter, k, similarity)
+}
+
+#' @rdname rwclust
+#' @export
+rwclust.matrix <- function(x, iter = 5, k = 3, similarity = "hk") {
+  x <- format_and_check_dataframe(x)
+  similarity <- retrieve_similarity_function(similarity)
+  
+  adj <- Matrix::sparseMatrix(
+    i = x[, 1],
+    j = x[, 2],
+    x = x[, 3],
+    symmetric = TRUE
+  )
+  
+  run_main_loop(adj, x, similarity, k, iter)
+}
+
+
 
 #' Executes the full algorithm
 #' 
