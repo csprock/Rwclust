@@ -31,7 +31,7 @@
 #' @param similarity string, the name of the similarity metric used to 
 #' update weights
 #' @param iter integer, number of iterations
-#' @param k integer, maximum length of random walk
+#' @param k integer greater than 1, maximum length of random walk
 #' 
 #' @return list
 #' \describe{
@@ -40,6 +40,10 @@
 #' }
 #' @export
 rwclust <- function(x, similarity="hk", iter, k) {
+
+    if (k < 2){
+        stop("k must be greater than 1")
+    }
 
     if (is.data.frame(x) || is.matrix(x)) {
 
