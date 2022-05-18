@@ -48,6 +48,15 @@ format_and_check_dataframe <- function(x) {
 }
 
 
+check_input_variables <- function(k, iter) {
+  if (k < 2) {
+    stop("k must be an integer greater than 1")
+  }
+  if (iter < 1) {
+    stop("iter must be a positive integer")
+  }
+}
+
 # check_simple <- function(g) {
 #   if (!igraph::is.simple(g)) {
 #     stop("Graph must be simple")

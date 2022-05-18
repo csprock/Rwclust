@@ -41,9 +41,7 @@
 #' @export
 rwclust <- function(x, similarity="hk", iter, k) {
 
-    if (k < 2){
-        stop("k must be greater than 1")
-    }
+    check_input_variables(k, iter)
 
     if (is.data.frame(x) || is.matrix(x)) {
 

@@ -8,7 +8,7 @@ test_that(
     weight = c(1,1,1)
   )
 
-  output <- rwclust(df, iter=3, k=1)
+  output <- rwclust(df, iter=3, k=2)
   expect_type(output, "list")
 
 })
