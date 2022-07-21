@@ -1,3 +1,9 @@
+retrieve_similarity_function <- function(similarity) {
+  switch(
+    similarity,
+    "hk" = hk_similarity
+  )
+}
 
 l1_norm <- function(x,y) {sum(abs(x - y))}
 
