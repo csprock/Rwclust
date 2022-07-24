@@ -4,13 +4,14 @@
 \alias{new_rwclust}
 \title{rwclust class constructor}
 \usage{
-new_rwclust(weights, adj)
+new_rwclust(x)
 }
 \arguments{
-\item{weights}{vector of double containing the edge weights}
-
-\item{adj}{Matrix produced at the final iteration of the algorithm}
+\item{x}{output of \code{run_main_loop} function}
 }
 \description{
 Returns a object of class "rwclust" for use with generic summary and plotting functions.
+}
+\seealso{
+\code{\link[=run_main_loop]{run_main_loop()}}
 }
