@@ -73,8 +73,8 @@ run_main_loop <- function(M, edgelist, similarity, k, iter) {
 
   for (i in 1:iter) {
     results <- update_weights(M = M, edgelist = edgelist, similarity = similarity, k = k)
-    M <- results$adj
+    M <- results[["adj"]]
   }
 
-  return(results)
+  return(new_rwclust(results))
 }
