@@ -1,6 +1,6 @@
 Package: Rwclust
 Title: Random Walk Clustering on Weighted Graphs
-Version: 0.0.1
+Version: 0.1.0
 Authors@R: 
     person("Carson", "Sprock", , "csprock@gmail.com", role = c("aut", "cre"))
 Author: Carson Sprock [aut, cre]
