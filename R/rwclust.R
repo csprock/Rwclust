@@ -43,6 +43,7 @@
 rwclust <- function(x, iter = 5, k = 3, similarity = "hk") {
   assert_count(iter, positive = TRUE)
   assert_count(k, positive = TRUE)
+  qassert(k, "N[2, Inf)")
   
   UseMethod("rwclust")
 }
