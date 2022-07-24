@@ -10,5 +10,6 @@ test_that(
 
   output <- rwclust(df, iter=3, k=1)
   expect_type(output, "list")
+  expect_s3_class(output, "rwclust")
 
 })

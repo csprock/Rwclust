@@ -76,5 +76,5 @@ run_main_loop <- function(M, edgelist, similarity, k, iter) {
     M <- results[["adj"]]
   }
 
-  return(results)
+  return(new_rwclust(results))
 }
